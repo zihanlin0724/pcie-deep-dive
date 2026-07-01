@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+rtl/**/.Xil/
+rtl/**/vivado*
+*.jou
+*.log
