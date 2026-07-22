@@ -48,8 +48,8 @@ pcie-deep-dive/
 
 | # | Module | Notes | Blog | RTL |
 |---|--------|-------|------|-----|
-| 1 | PCIe Background Info | TODO | TODO | - |
-| 2 | PCIe Overview | TODO | TODO | - |
+| 1 | PCIe Background Info | DONE | TODO | - |
+| 2 | PCIe Overview | WIP | TODO | - |
 | 3 | Configuration Space | TODO | TODO | - |
 | 4 | Address Space & Routing | TODO | TODO | - |
 | 5 | TLP Elements | TODO | TODO | TODO |
@@ -132,6 +132,9 @@ Project repository: [pcie-dma-attack-detector](https://github.com/zihanlin0724/p
 
 Goal: Identify PCILeech-style attacks at the TLP level using
 machine learning and a lightweight hardware monitor.
+
+**Evaluation path (2026-07-13)**: No PCIe hardware — synthetic TLP traces
+(Python) + RTL simulation/synthesis; see `PCIe_project/02_Research_Project_Plan.md`.
 
 ---
 

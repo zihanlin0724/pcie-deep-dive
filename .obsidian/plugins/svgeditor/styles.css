@@ -1,0 +1,1495 @@
+.svg-edit-modal {
+	display: flex;
+	flex-direction: column;
+	width: min(98vw, 1440px);
+	height: min(94vh, 940px);
+	--svg-edit-chrome: #737978;
+	--svg-edit-chrome-dark: #2f3c42;
+	--svg-edit-chrome-mid: #596061;
+	--svg-edit-workspace: #aaaaaa;
+	--svg-edit-panel: #d8d8d8;
+	--svg-edit-control: #c6c6c6;
+	--svg-edit-accent: #f2c300;
+	--svg-edit-line: #5d6362;
+}
+
+.svg-edit-modal .modal-content {
+	display: flex;
+	flex: 1 1 auto;
+	min-height: 0;
+	height: auto;
+	padding: 0;
+	overflow: hidden;
+}
+
+.svg-edit-shell {
+	display: grid;
+	grid-template-rows: auto minmax(0, 1fr) 34px;
+	flex: 1 1 auto;
+	width: 100%;
+	height: 100%;
+	min-height: 0;
+	color: #111111;
+	background: var(--svg-edit-workspace);
+	border: 0;
+	border-radius: 0;
+	overflow: hidden;
+}
+
+.svg-edit-top,
+.svg-edit-bottom {
+	display: flex;
+	align-items: center;
+	gap: 1px;
+	min-height: 28px;
+	padding: 2px 4px;
+	background: var(--svg-edit-chrome);
+	border-color: var(--svg-edit-line);
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+}
+
+.svg-edit-top {
+	display: grid;
+	grid-template-rows: auto auto;
+	gap: 1px;
+	border-bottom: 1px solid var(--svg-edit-line);
+	overflow: hidden;
+}
+
+.svg-edit-bottom {
+	position: sticky;
+	bottom: 0;
+	z-index: 35;
+	flex: 0 0 auto;
+	height: auto;
+	min-height: 38px;
+	border-top: 1px solid var(--svg-edit-line);
+}
+
+.svg-edit-top-main,
+.svg-edit-top-selection,
+.svg-edit-top-context,
+.svg-edit-top-text {
+	display: flex;
+	align-items: center;
+	gap: 1px;
+	min-width: 0;
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+}
+
+.svg-edit-top-selection,
+.svg-edit-top-context {
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.svg-edit-top-selection.is-visible,
+.svg-edit-top-context.is-visible {
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.svg-edit-top-selection,
+.svg-edit-top-context,
+.svg-edit-top-text {
+	min-height: 26px;
+	padding-top: 1px;
+	border-top: 1px solid var(--svg-edit-line);
+}
+
+.svg-edit-top-text {
+	display: none;
+}
+
+.svg-edit-top-text.is-visible {
+	display: flex;
+}
+
+.svg-edit-context-path {
+	display: none;
+	align-items: center;
+	gap: 5px;
+	min-height: 24px;
+	padding-top: 1px;
+	color: #ffffff;
+	font-size: var(--font-ui-smaller);
+	border-top: 1px solid var(--svg-edit-line);
+}
+
+.svg-edit-context-path.is-visible {
+	display: flex;
+}
+
+.svg-edit-context-path button {
+	height: 20px;
+	padding: 0 6px;
+	color: #ffffff;
+	background: var(--svg-edit-chrome-dark);
+	border: 1px solid var(--svg-edit-line);
+	border-radius: 0;
+	font-size: inherit;
+}
+
+.svg-edit-selection-panel {
+	display: none;
+}
+
+.svg-edit-selection-panel.is-visible {
+	display: flex;
+}
+
+.svg-edit-body {
+	display: grid;
+	grid-template-columns: 40px minmax(0, 1fr) 0;
+	min-height: 0;
+	overflow: hidden;
+}
+
+.svg-edit-body.has-layer-panel {
+	grid-template-columns: 40px minmax(0, 1fr) 220px;
+}
+
+.svg-edit-left {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	align-items: center;
+	gap: 1px;
+	padding: 8px 6px;
+	background: var(--svg-edit-chrome);
+	border-right: 1px solid var(--svg-edit-line);
+	overflow: visible;
+	z-index: 40;
+}
+
+.svg-edit-brand-panel {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	height: 26px;
+	padding: 0 6px;
+	color: #ffffff;
+	font-weight: 600;
+	font-size: var(--font-ui-smaller);
+	background: var(--svg-edit-chrome-dark);
+	border-right: 1px solid var(--svg-edit-line);
+	cursor: pointer;
+}
+
+.svg-edit-brand-panel:focus-visible {
+	outline: 2px solid var(--interactive-accent);
+	outline-offset: -2px;
+}
+
+.svg-editor-inline-host,
+.svg-editor-inline-wrapper {
+	display: inline-block;
+	position: relative;
+	max-width: 100%;
+	line-height: 0;
+}
+
+.svg-editor-inline-host > img,
+.svg-editor-inline-host > a > img,
+.svg-editor-inline-wrapper > img,
+.svg-editor-inline-wrapper > a > img {
+	display: block;
+}
+
+.svg-editor-inline-edit-button {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	z-index: 2;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	padding: 0;
+	color: var(--text-normal);
+	background: var(--background-primary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+	opacity: 0;
+	cursor: pointer;
+	transition: opacity 120ms ease-in-out;
+}
+
+.svg-editor-inline-host:hover .svg-editor-inline-edit-button,
+.svg-editor-inline-wrapper:hover .svg-editor-inline-edit-button,
+.svg-editor-inline-edit-button:focus-visible {
+	opacity: 1;
+}
+
+.svg-editor-inline-edit-button svg {
+	width: 16px;
+	height: 16px;
+}
+
+.svg-edit-brand-panel svg {
+	width: 16px;
+	height: 16px;
+	color: var(--svg-edit-accent);
+}
+
+.svg-edit-brand-caret {
+	font-size: 10px;
+}
+
+.svg-edit-title-panel {
+	display: flex;
+	align-items: center;
+	min-width: 106px;
+	max-width: 138px;
+	height: 26px;
+	padding: 0 8px;
+	color: #ffffff;
+	font-weight: 700;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+}
+
+.svg-edit-title-panel p {
+	overflow: hidden;
+	margin: 0;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.svg-edit-panel {
+	display: inline-flex;
+	align-items: center;
+	gap: 2px;
+}
+
+.svg-edit-context-panel {
+	display: none;
+}
+
+.svg-edit-context-panel.is-visible {
+	display: inline-flex;
+}
+
+.svg-edit-flying-tool {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.svg-edit-flying-tool::after {
+	position: absolute;
+	right: 2px;
+	bottom: 2px;
+	width: 0;
+	height: 0;
+	border-top: 4px solid transparent;
+	border-left: 4px solid var(--text-faint);
+	content: "";
+	pointer-events: none;
+}
+
+.svg-edit-flyout {
+	position: absolute;
+	top: 0;
+	left: calc(100% + 5px);
+	display: none;
+	align-items: center;
+	gap: 3px;
+	padding: 4px;
+	background: var(--svg-edit-panel);
+	border: 1px solid #8a8a8a;
+	border-radius: 0;
+	box-shadow: none;
+	z-index: 80;
+}
+
+.svg-edit-flying-tool:hover .svg-edit-flyout,
+.svg-edit-flying-tool:focus-within .svg-edit-flyout {
+	display: flex;
+}
+
+.tool_sep {
+	width: 1px;
+	height: 24px;
+	margin: 0 2px;
+	background: var(--svg-edit-line);
+}
+
+.svg-edit-left .tool_sep {
+	width: 28px;
+	height: 1px;
+	margin: 4px 0;
+}
+
+.svg-edit-icon-button {
+	display: inline-flex;
+	flex: 0 0 auto;
+	align-items: center;
+	justify-content: center;
+	width: 25px;
+	height: 25px;
+	padding: 0;
+	color: #ffffff;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.svg-edit-left .svg-edit-icon-button {
+	width: 27px;
+	height: 27px;
+	color: var(--svg-edit-accent);
+	background: transparent;
+}
+
+.svg-edit-icon-button:hover,
+.svg-edit-icon-button.is-active {
+	color: var(--svg-edit-accent);
+	background: var(--svg-edit-chrome-dark);
+	border-color: var(--svg-edit-chrome-dark);
+}
+
+.svg-edit-icon-button:disabled,
+.svg-edit-icon-button.is-disabled {
+	opacity: 0.35;
+	cursor: not-allowed;
+}
+
+.svg-edit-reorient-button {
+	display: none;
+}
+
+.svg-edit-reorient-button.is-visible {
+	display: inline-flex;
+}
+
+.svg-edit-use-only-button {
+	display: none;
+}
+
+.svg-edit-use-only-button.is-visible {
+	display: inline-flex;
+}
+
+.svg-edit-icon-button svg {
+	width: 15px;
+	height: 15px;
+}
+
+.svg-edit-control {
+	display: inline-flex;
+	flex: 0 0 auto;
+	align-items: center;
+	gap: 3px;
+	min-height: 24px;
+	padding: 0 3px;
+	color: #111111;
+	font-size: var(--font-ui-smaller);
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+}
+
+.svg-edit-control span {
+	max-width: 46px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.svg-edit-color-control input[type="color"] {
+	width: 20px;
+	height: 18px;
+	padding: 0;
+	border: 1px solid var(--svg-edit-line);
+	background: var(--svg-edit-control);
+}
+
+.svg-edit-number-control input {
+	width: 42px;
+	min-width: 0;
+	height: 22px;
+	padding: 0 2px;
+	text-align: center;
+	background: var(--svg-edit-control);
+	border: 1px solid var(--svg-edit-line);
+}
+
+.svg-edit-selected-field {
+	gap: 2px;
+	padding-inline: 1px;
+}
+
+.svg-edit-selected-field span {
+	max-width: none;
+	min-width: 0;
+	font-size: 11px;
+}
+
+.svg-edit-selected-text-field input {
+	width: 58px;
+	min-width: 0;
+	height: 20px;
+	padding: 0 4px;
+	background: var(--svg-edit-control);
+	border: 1px solid var(--svg-edit-line);
+}
+
+.svg-edit-selected-number-field input {
+	width: 36px;
+	min-width: 0;
+	height: 20px;
+	padding: 0 1px;
+	text-align: center;
+	background: var(--svg-edit-control);
+	border: 1px solid var(--svg-edit-line);
+}
+
+.svg-edit-number-stepper {
+	display: grid;
+	grid-template-rows: 11px 11px;
+	width: 12px;
+}
+
+.svg-edit-number-stepper button {
+	width: 12px;
+	height: 11px;
+	padding: 0;
+	color: #111111;
+	font-size: 7px;
+	line-height: 1;
+	background: var(--svg-edit-control);
+	border: 1px solid var(--svg-edit-line);
+	border-left: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.svg-edit-number-stepper button:hover {
+	color: var(--svg-edit-accent);
+	background: var(--svg-edit-chrome-dark);
+}
+
+.svg-edit-select-control select {
+	max-width: 90px;
+	height: 22px;
+	font-size: var(--font-ui-smaller);
+	background: var(--svg-edit-control);
+	border: 1px solid var(--svg-edit-line);
+}
+
+.svg-edit-zoom-control {
+	gap: 1px;
+	padding-right: 5px;
+}
+
+.svg-edit-zoom-icon svg {
+	width: 16px;
+	height: 16px;
+	color: var(--svg-edit-accent);
+}
+
+.svg-edit-zoom-control input {
+	width: 42px;
+	min-width: 0;
+	height: 22px;
+	padding: 0 2px;
+	text-align: center;
+	background: var(--svg-edit-control);
+	border: 1px solid var(--svg-edit-line);
+}
+
+.svg-edit-zoom-stepper {
+	display: grid;
+	grid-template-rows: 11px 11px;
+	width: 12px;
+}
+
+.svg-edit-zoom-stepper button {
+	width: 12px;
+	height: 11px;
+	padding: 0;
+	color: #111111;
+	font-size: 7px;
+	line-height: 1;
+	background: var(--svg-edit-control);
+	border: 1px solid var(--svg-edit-line);
+	border-left: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.svg-edit-zoom-stepper button:hover {
+	color: var(--svg-edit-accent);
+	background: var(--svg-edit-chrome-dark);
+}
+
+.svg-edit-text-control input {
+	width: 128px;
+	min-width: 0;
+	height: 22px;
+	background: var(--svg-edit-control);
+	border: 1px solid var(--svg-edit-line);
+}
+
+.svg-edit-paint-control {
+	gap: 3px;
+}
+
+.svg-edit-paint-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	height: 22px;
+	padding: 2px 5px;
+	color: #111111;
+	background: var(--svg-edit-control);
+	border: 1px solid var(--svg-edit-line);
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.svg-edit-paint-preview,
+.svg-paint-large-preview {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	border: 1px solid var(--svg-edit-line);
+	background: #ffffff;
+}
+
+.svg-edit-paint-preview.is-none,
+.svg-paint-large-preview.is-none {
+	background-color: #ffffff;
+	background-image:
+		linear-gradient(45deg, transparent 45%, var(--text-error) 46%, var(--text-error) 54%, transparent 55%),
+		linear-gradient(135deg, transparent 45%, var(--text-error) 46%, var(--text-error) 54%, transparent 55%);
+}
+
+.svg-edit-paint-value {
+	min-width: 48px;
+	text-align: left;
+	font-size: 11px;
+	line-height: 1;
+}
+
+.svg-edit-palette {
+	display: grid;
+	grid-template-columns: repeat(21, 16px);
+	grid-auto-rows: 16px;
+	gap: 2px;
+	align-items: center;
+	padding: 2px 4px;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+}
+
+.svg-edit-swatch {
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	border: 1px solid var(--svg-edit-line);
+	border-radius: 0;
+}
+
+.svg-edit-swatch.color-000000 { background-color: #000000; }
+.svg-edit-swatch.color-3f3f3f { background-color: #3f3f3f; }
+.svg-edit-swatch.color-7f7f7f { background-color: #7f7f7f; }
+.svg-edit-swatch.color-bfbfbf { background-color: #bfbfbf; }
+.svg-edit-swatch.color-ffffff { background-color: #ffffff; }
+.svg-edit-swatch.color-ff0000 { background-color: #ff0000; }
+.svg-edit-swatch.color-ff7f00 { background-color: #ff7f00; }
+.svg-edit-swatch.color-ffff00 { background-color: #ffff00; }
+.svg-edit-swatch.color-7fff00 { background-color: #7fff00; }
+.svg-edit-swatch.color-00ff00 { background-color: #00ff00; }
+.svg-edit-swatch.color-00ff7f { background-color: #00ff7f; }
+.svg-edit-swatch.color-00ffff { background-color: #00ffff; }
+.svg-edit-swatch.color-007fff { background-color: #007fff; }
+.svg-edit-swatch.color-0000ff { background-color: #0000ff; }
+.svg-edit-swatch.color-7f00ff { background-color: #7f00ff; }
+.svg-edit-swatch.color-ff00ff { background-color: #ff00ff; }
+.svg-edit-swatch.color-ff007f { background-color: #ff007f; }
+.svg-edit-swatch.color-7f0000 { background-color: #7f0000; }
+.svg-edit-swatch.color-7f3f00 { background-color: #7f3f00; }
+.svg-edit-swatch.color-7f7f00 { background-color: #7f7f00; }
+.svg-edit-swatch.color-3f7f00 { background-color: #3f7f00; }
+.svg-edit-swatch.color-007f00 { background-color: #007f00; }
+.svg-edit-swatch.color-007f3f { background-color: #007f3f; }
+.svg-edit-swatch.color-007f7f { background-color: #007f7f; }
+.svg-edit-swatch.color-003f7f { background-color: #003f7f; }
+.svg-edit-swatch.color-00007f { background-color: #00007f; }
+.svg-edit-swatch.color-3f007f { background-color: #3f007f; }
+.svg-edit-swatch.color-7f007f { background-color: #7f007f; }
+.svg-edit-swatch.color-7f003f { background-color: #7f003f; }
+.svg-edit-swatch.color-ffaaaa { background-color: #ffaaaa; }
+.svg-edit-swatch.color-ffd4aa { background-color: #ffd4aa; }
+.svg-edit-swatch.color-ffffaa { background-color: #ffffaa; }
+.svg-edit-swatch.color-d4ffaa { background-color: #d4ffaa; }
+.svg-edit-swatch.color-aaffaa { background-color: #aaffaa; }
+.svg-edit-swatch.color-aaffd4 { background-color: #aaffd4; }
+.svg-edit-swatch.color-aaffff { background-color: #aaffff; }
+.svg-edit-swatch.color-aad4ff { background-color: #aad4ff; }
+.svg-edit-swatch.color-aaaaff { background-color: #aaaaff; }
+.svg-edit-swatch.color-d4aaff { background-color: #d4aaff; }
+.svg-edit-swatch.color-ffaaff { background-color: #ffaaff; }
+
+.svg-edit-swatch.is-none {
+	background-color: #ffffff;
+	background-image:
+		linear-gradient(45deg, transparent 45%, var(--text-error) 46%, var(--text-error) 54%, transparent 55%),
+		linear-gradient(135deg, transparent 45%, var(--text-error) 46%, var(--text-error) 54%, transparent 55%);
+}
+
+.svg-marker {
+	pointer-events: none;
+}
+
+.svg-edit-canvas-host {
+	min-width: 0;
+	min-height: 0;
+	overflow: auto;
+	background-color: var(--svg-edit-workspace);
+}
+
+.svg-edit-canvas-host.is-grid-visible {
+	background:
+		linear-gradient(to right, var(--svg-edit-grid-color, rgba(0, 0, 0, 0.18)) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--svg-edit-grid-color, rgba(0, 0, 0, 0.18)) 1px, transparent 1px),
+		linear-gradient(to right, var(--svg-edit-grid-major-color, rgba(0, 0, 0, 0.34)) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--svg-edit-grid-major-color, rgba(0, 0, 0, 0.34)) 1px, transparent 1px);
+	background-color: var(--svg-edit-workspace);
+	background-size:
+		var(--svg-edit-grid-minor-size, 10px) var(--svg-edit-grid-minor-size, 10px),
+		var(--svg-edit-grid-minor-size, 10px) var(--svg-edit-grid-minor-size, 10px),
+		var(--svg-edit-grid-major-size, 100px) var(--svg-edit-grid-major-size, 100px),
+		var(--svg-edit-grid-major-size, 100px) var(--svg-edit-grid-major-size, 100px);
+}
+
+.svg-edit-canvas-host.wireframe #svgcontent * {
+	fill: none;
+	stroke: #000000;
+	stroke-width: var(--svg-edit-wireframe-stroke-width, 1px);
+	stroke-opacity: 1;
+	stroke-dasharray: 0;
+	opacity: 1;
+	pointer-events: stroke;
+	filter: none;
+}
+
+.svg-edit-canvas-host.wireframe #svgcontent text {
+	fill: #000000;
+	stroke: none;
+}
+
+.svg-edit-canvas-host.wireframe #canvasBackground > rect {
+	fill: #ffffff;
+}
+
+.svg-edit-canvas-host #svgroot {
+	overflow: visible;
+}
+
+.svg-edit-canvas-host.is-zoom-mode {
+	cursor: zoom-in;
+}
+
+.svg-edit-canvas-host.is-pan-mode,
+.svg-edit-canvas-host.is-panning {
+	cursor: grab;
+}
+
+.svg-edit-canvas-host.is-panning {
+	cursor: grabbing;
+}
+
+.svg-edit-eyedropper-cursor {
+	position: fixed;
+	z-index: 900;
+	display: none;
+	width: 14px;
+	height: 14px;
+	pointer-events: none;
+	border: 2px solid #111111;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.72);
+}
+
+.svg-edit-eyedropper-cursor.is-visible {
+	display: block;
+}
+
+.svg-edit-context-menu {
+	position: absolute;
+	z-index: 1000;
+	display: none;
+	min-width: 170px;
+	padding: 3px 0;
+	background: #eeeeee;
+	border: 1px solid #555555;
+	box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.28);
+	color: #111111;
+	font-size: 12px;
+}
+
+.svg-edit-context-menu.is-open {
+	display: block;
+}
+
+.svg-edit-context-menu-item {
+	display: block;
+	width: 100%;
+	height: 24px;
+	padding: 0 22px 0 10px;
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	color: inherit;
+	font: inherit;
+	text-align: left;
+	white-space: nowrap;
+}
+
+.svg-edit-context-menu-item:hover:not(.is-disabled) {
+	background: #2d3d45;
+	color: #ffffff;
+}
+
+.svg-edit-context-menu-item.is-disabled {
+	color: #888888;
+	cursor: default;
+}
+
+.svg-edit-context-menu-separator {
+	height: 1px;
+	margin: 3px 0;
+	background: #c0c0c0;
+}
+
+.svg-edit-canvas-frame {
+	display: grid;
+	grid-template-columns: 17px minmax(0, 1fr);
+	grid-template-rows: 17px minmax(0, 1fr);
+	min-width: 0;
+	min-height: 0;
+	background: var(--svg-edit-workspace);
+}
+
+.svg-edit-ruler-corner {
+	grid-column: 1;
+	grid-row: 1;
+	background: #d7d7d7;
+	border-right: 1px solid #777777;
+	border-bottom: 1px solid #777777;
+	box-sizing: border-box;
+}
+
+.svg-edit-ruler {
+	overflow: hidden;
+	background: #d7d7d7;
+	box-sizing: border-box;
+	z-index: 4;
+}
+
+.svg-edit-ruler.is-hidden,
+.svg-edit-ruler-corner.is-hidden {
+	display: none;
+}
+
+.svg-edit-ruler-x {
+	grid-column: 2;
+	grid-row: 1;
+	height: 17px;
+	border-bottom: 1px solid #777777;
+}
+
+.svg-edit-ruler-y {
+	grid-column: 1;
+	grid-row: 2;
+	width: 17px;
+	border-right: 1px solid #777777;
+}
+
+.svg-edit-ruler-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.svg-edit-ruler canvas {
+	display: block;
+	background: #d7d7d7;
+}
+
+.svg-edit-canvas-frame .svg-edit-canvas-host {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+.svg-edit-layer-panel {
+	display: grid;
+	grid-template-rows: auto auto auto minmax(0, 1fr);
+	gap: 6px;
+	min-width: 0;
+	padding: 8px;
+	background: var(--svg-edit-panel);
+	border-left: 1px solid var(--svg-edit-line);
+	overflow: hidden;
+}
+
+.svg-edit-layer-panel:not(.is-visible) {
+	display: none;
+}
+
+.svg-edit-layer-header,
+.svg-edit-layer-actions {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	min-width: 0;
+}
+
+.svg-edit-layer-title {
+	flex: 1 1 auto;
+	overflow: hidden;
+	color: var(--text-muted);
+	font-weight: 600;
+	font-size: var(--font-ui-small);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.svg-edit-layer-actions {
+	flex-wrap: wrap;
+}
+
+.svg-edit-overview {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+
+.svg-edit-overview-header {
+	display: flex;
+	align-items: center;
+	min-height: 20px;
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+	font-weight: 600;
+}
+
+.svg-edit-overview-stage {
+	position: relative;
+	height: 112px;
+	overflow: hidden;
+	background:
+		linear-gradient(45deg, var(--background-secondary) 25%, transparent 25%),
+		linear-gradient(-45deg, var(--background-secondary) 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, var(--background-secondary) 75%),
+		linear-gradient(-45deg, transparent 75%, var(--background-secondary) 75%);
+	background-color: var(--background-primary);
+	background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+	background-size: 12px 12px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 5px;
+	cursor: crosshair;
+}
+
+.svg-edit-overview-svg {
+	width: 100%;
+	height: 100%;
+	display: block;
+	pointer-events: none;
+}
+
+.svg-edit-overview-clone {
+	pointer-events: none;
+}
+
+.svg-edit-overview-viewport {
+	position: absolute;
+	inset: 0 auto auto 0;
+	border: 1px solid var(--interactive-accent);
+	background: color-mix(in srgb, var(--interactive-accent) 16%, transparent);
+	box-shadow: 0 0 0 1px color-mix(in srgb, var(--background-primary) 70%, transparent);
+	pointer-events: none;
+}
+
+.svg-edit-layer-list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-height: 0;
+	overflow: auto;
+}
+
+.svg-edit-layer-row {
+	display: grid;
+	grid-template-columns: 18px minmax(0, 1fr) 18px;
+	align-items: center;
+	gap: 6px;
+	width: 100%;
+	min-height: 28px;
+	padding: 3px 6px;
+	text-align: left;
+	background: var(--background-primary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 5px;
+}
+
+.svg-edit-layer-row.is-current {
+	border-color: var(--interactive-accent);
+	box-shadow: inset 3px 0 0 var(--interactive-accent);
+}
+
+.svg-edit-layer-row svg {
+	width: 14px;
+	height: 14px;
+}
+
+.svg-edit-layer-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.svg-edit-layer-name.is-muted,
+.svg-edit-layer-empty {
+	color: var(--text-muted);
+}
+
+.svg-edit-shape-tool {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.svg-edit-shape-tool::after {
+	position: absolute;
+	right: 2px;
+	bottom: 2px;
+	width: 0;
+	height: 0;
+	border-top: 4px solid transparent;
+	border-left: 4px solid var(--svg-edit-accent);
+	content: "";
+	pointer-events: none;
+}
+
+.svg-edit-shape-flyout {
+	position: absolute;
+	top: 0;
+	left: calc(100% + 6px);
+	display: none;
+	grid-template-columns: 180px 90px;
+	gap: 0;
+	background: var(--svg-edit-panel);
+	border: 1px solid #8a8a8a;
+	box-shadow: none;
+	z-index: 90;
+}
+
+.svg-edit-shape-tool:hover .svg-edit-shape-flyout,
+.svg-edit-shape-tool:focus-within .svg-edit-shape-flyout,
+.svg-edit-shape-tool.is-open .svg-edit-shape-flyout {
+	display: grid;
+}
+
+.svg-edit-shape-grid {
+	display: grid;
+	grid-template-columns: repeat(5, 30px);
+	grid-auto-rows: 28px;
+	gap: 4px;
+	padding: 6px;
+	max-height: 264px;
+	overflow: auto;
+}
+
+.svg-edit-shape-grid .svg-edit-icon-button {
+	width: 30px;
+	height: 28px;
+	color: var(--svg-edit-accent);
+	background: var(--svg-edit-chrome);
+	border: 1px solid #8a8a8a;
+}
+
+.svg-edit-shape-grid .svg-edit-icon-button:hover {
+	background: var(--svg-edit-chrome-dark);
+}
+
+.svg-edit-shape-preview-button svg {
+	width: 24px;
+	height: 24px;
+	color: #f2c94c;
+	overflow: visible;
+}
+
+.svg-edit-shape-preview-button path {
+	pointer-events: none;
+}
+
+.svg-edit-shape-categories {
+	display: grid;
+	grid-auto-rows: 22px;
+	border-left: 1px solid #8a8a8a;
+}
+
+.svg-edit-shape-category {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0 6px;
+	width: 100%;
+	height: 22px;
+	color: #111111;
+	font-size: var(--font-ui-smaller);
+	text-align: left;
+	background: #eeeeee;
+	box-shadow: none;
+	border-bottom: 1px solid #8a8a8a;
+	border-left: 0;
+	border-right: 0;
+	border-top: 0;
+	border-radius: 0;
+	cursor: pointer;
+}
+
+.svg-edit-shape-category:hover {
+	background: #d7d7d7;
+}
+
+.svg-edit-shape-category.is-active {
+	color: #ffffff;
+	background: var(--svg-edit-chrome-dark);
+}
+
+.svg-edit-status {
+	display: inline-flex;
+	align-items: center;
+	min-width: 120px;
+	max-width: 220px;
+	height: 28px;
+	overflow: hidden;
+	color: var(--text-muted);
+	font-size: var(--font-ui-smaller);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.svg-edit-key-debug {
+	display: inline-flex;
+	align-items: center;
+	min-width: 260px;
+	max-width: 520px;
+	height: 28px;
+	overflow: hidden;
+	color: var(--text-muted);
+	font-size: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.svg-edit-text-input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.svg-source-modal {
+	width: min(92vw, 980px);
+	height: min(86vh, 720px);
+}
+
+.svg-source-modal .modal-content {
+	display: grid;
+	grid-template-rows: minmax(0, 1fr) auto auto;
+	gap: 10px;
+	height: calc(min(86vh, 720px) - 72px);
+}
+
+.svg-source-editor {
+	width: 100%;
+	height: 100%;
+	min-height: 360px;
+	resize: none;
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-small);
+}
+
+.svg-source-options {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.svg-source-option {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: var(--font-ui-small);
+	user-select: none;
+}
+
+.svg-source-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+}
+
+.svg-confirm-modal {
+	width: min(92vw, 420px);
+}
+
+.svg-confirm-message {
+	margin-bottom: 16px;
+	color: var(--text-normal);
+	font-size: var(--font-ui-small);
+}
+
+.svg-confirm-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+}
+
+.svg-close-changes-modal {
+	width: min(92vw, 460px);
+}
+
+.svg-close-changes-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	justify-content: flex-end;
+}
+
+.svg-prompt-modal {
+	width: min(92vw, 420px);
+}
+
+.svg-prompt-input {
+	width: 100%;
+	margin-bottom: 16px;
+}
+
+.svg-prompt-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+}
+
+.svg-gradient-modal {
+	width: min(92vw, 420px);
+}
+
+.svg-gradient-form {
+	display: grid;
+	gap: 10px;
+	margin-bottom: 16px;
+}
+
+.svg-gradient-field {
+	display: grid;
+	grid-template-columns: 120px minmax(0, 1fr);
+	align-items: center;
+	gap: 8px;
+	font-size: var(--font-ui-small);
+}
+
+.svg-gradient-field input,
+.svg-gradient-field select {
+	width: 100%;
+}
+
+.svg-gradient-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+}
+
+.svg-paint-modal {
+	width: min(92vw, 560px);
+}
+
+.svg-paint-tabs {
+	display: flex;
+	gap: 4px;
+	margin-bottom: 8px;
+}
+
+.svg-paint-tabs button {
+	padding: 4px 8px;
+	border: 1px solid var(--svg-edit-line);
+	border-radius: 0;
+}
+
+.svg-paint-tabs button.is-active {
+	color: #111111;
+	background: #ffffff;
+}
+
+.svg-paint-panel {
+	min-height: 270px;
+	padding: 8px;
+	background: #e6e6e6;
+	border: 1px solid var(--svg-edit-line);
+}
+
+.svg-paint-solid-layout {
+	display: grid;
+	grid-template-columns: minmax(180px, 1fr) 18px 72px 96px 128px;
+	gap: 8px;
+	align-items: start;
+}
+
+.svg-paint-map {
+	position: relative;
+	height: 220px;
+	background:
+		linear-gradient(to top, #000000, transparent),
+		linear-gradient(to right, #ffffff, #ff0000);
+	border: 1px solid var(--svg-edit-line);
+	cursor: crosshair;
+}
+
+.svg-paint-hue-bar {
+	height: 220px;
+	background: linear-gradient(to bottom, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+	border: 1px solid var(--svg-edit-line);
+	cursor: ns-resize;
+}
+
+.svg-paint-preview-column {
+	display: grid;
+	gap: 4px;
+	justify-items: center;
+	font-size: 10px;
+}
+
+.svg-paint-large-preview {
+	width: 64px;
+	height: 64px;
+}
+
+.svg-paint-fields,
+.svg-paint-gradient-form {
+	display: grid;
+	gap: 5px;
+}
+
+.svg-paint-field {
+	display: grid;
+	grid-template-columns: 22px minmax(0, 1fr);
+	align-items: center;
+	gap: 5px;
+	font-size: 11px;
+}
+
+.svg-paint-gradient-field {
+	display: grid;
+	grid-template-columns: 78px 48px;
+	align-items: center;
+	gap: 6px;
+	font-size: 11px;
+	white-space: nowrap;
+}
+
+.svg-paint-field input {
+	width: 100%;
+	height: 22px;
+}
+
+.svg-paint-gradient-field input[type="number"] {
+	width: 48px;
+	height: 22px;
+}
+
+.svg-paint-gradient-field input[type="color"] {
+	width: 44px;
+	height: 22px;
+	padding: 0;
+}
+
+.svg-paint-quick-palette {
+	display: grid;
+	grid-template-columns: repeat(6, 16px);
+	gap: 2px;
+	align-content: start;
+}
+
+.svg-paint-gradient-form {
+	grid-template-columns: minmax(220px, 1fr) 150px 128px;
+	align-items: start;
+}
+
+.svg-paint-gradient-preview {
+	grid-column: 1;
+	grid-row: 1 / 7;
+	height: 260px;
+	border: 1px solid var(--svg-edit-line);
+}
+
+.svg-paint-gradient-controls {
+	display: grid;
+	grid-column: 2 / 4;
+	grid-row: 1 / 5;
+	gap: 8px;
+}
+
+.svg-paint-gradient-group {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 4px 8px;
+	padding: 6px;
+	border: 1px solid var(--svg-edit-line);
+	border-radius: 4px;
+	background: #ededed;
+}
+
+.svg-paint-gradient-group-title {
+	grid-column: 1 / -1;
+	text-align: center;
+	font-weight: 600;
+	font-size: 11px;
+}
+
+.svg-paint-compact-field {
+	display: grid;
+	grid-template-columns: 34px 48px;
+	align-items: center;
+	gap: 4px;
+	font-size: 11px;
+	white-space: nowrap;
+}
+
+.svg-paint-compact-field input {
+	width: 48px;
+	height: 22px;
+}
+
+.svg-paint-gradient-checkbox {
+	display: flex;
+	grid-column: 1 / -1;
+	align-items: center;
+	gap: 4px;
+	font-size: 11px;
+	white-space: nowrap;
+}
+
+.svg-paint-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	margin-top: 10px;
+}
+
+.svg-document-properties-modal {
+	width: min(92vw, 460px);
+}
+
+.svg-document-properties-form {
+	display: grid;
+	gap: 10px;
+}
+
+.svg-document-properties-field {
+	display: grid;
+	grid-template-columns: 84px minmax(0, 1fr);
+	align-items: center;
+	gap: 8px;
+	font-size: var(--font-ui-small);
+}
+
+.svg-document-properties-field input,
+.svg-document-properties-form select {
+	width: 100%;
+}
+
+.svg-document-properties-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	margin-top: 14px;
+}
+
+.svg-editor-preferences-modal {
+	width: min(92vw, 520px);
+}
+
+.svg-editor-preferences-form {
+	display: grid;
+	gap: 10px;
+}
+
+.svg-editor-preferences-field {
+	display: grid;
+	grid-template-columns: 128px minmax(0, 1fr);
+	align-items: center;
+	gap: 8px;
+	font-size: var(--font-ui-small);
+}
+
+.svg-editor-preferences-checkbox input {
+	justify-self: start;
+}
+
+.svg-editor-preferences-field input,
+.svg-editor-preferences-field select {
+	width: 100%;
+}
+
+.svg-editor-preferences-field input[type="checkbox"] {
+	width: auto;
+}
+
+.svg-editor-preferences-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	margin-top: 14px;
+}
+
+.svg-export-modal {
+	width: min(92vw, 420px);
+}
+
+.svg-export-form {
+	display: grid;
+	gap: 10px;
+}
+
+.svg-export-field {
+	display: grid;
+	grid-template-columns: 84px minmax(0, 1fr);
+	align-items: center;
+	gap: 8px;
+	font-size: var(--font-ui-small);
+}
+
+.svg-export-field.is-hidden {
+	display: none;
+}
+
+.svg-export-field input,
+.svg-export-field select {
+	width: 100%;
+}
+
+.svg-export-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	margin-top: 14px;
+}

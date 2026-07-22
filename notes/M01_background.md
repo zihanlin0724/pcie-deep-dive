@@ -3,8 +3,9 @@
 **Source**: MindShare PCIe 3.1 — Module 1 (Background Info, ~96 MB)  
 **Plan**: `PCIe_project/01_PCIe_and_OS_Study_Plan.md` Module 1  
 **Date started**: 2026-07-09  
-**Time spent**: __ h  
-**Status**: Pass 1
+**Date completed**: 2026-07-10 (San Jose)  
+**Time spent**: ~3.5 h  
+**Status**: Pass 1 + notes complete (blog pending)
 
 #pcie/module01
 
@@ -12,25 +13,22 @@
 
 ## One-liner
 
-> PCIe replaces PCI's shared parallel bus with serial point-to-point links and a packet-based layered protocol, while keeping software concepts like configuration space and BARs for easier migration.
+> （例：PCIe 用串行点对点链路替代 PCI 共享总线，并分层实现可扩展的高速 I/O。——看完后再改成你自己的话）
+
 ---
 
 ## Pass 1 — Outline (watch 1×)
 
-| Time | Topic              | Notes                        |
-| ---- | ------------------ | ---------------------------- |
-| 0:00 | Intro / Agenda     |                              |
-|      | Early buses -> PCI | ISA, unified I/O             |
-|      | PCI limits         | Shared bus, pins, clock      |
-|      | PCI-X (optional)   | P2P mode, still parallel     |
-|      | PCIe value         | Serial, P2P, packets, layers |
-|      | 3-layer model      | TLP/DLLP/Physical            |
-| end  | preview M2         | Topology next                |
+| Time | Topic | Notes |
+|------|-------|-------|
+| | Why not stay on PCI? | bandwidth, pins, clock |
+| | PCIe vs PCI summary | |
+| | Layered model intro | Transaction / Data Link / Physical |
 
 ### Checklist (from study plan)
 
-- [ ] PCIe history, comparison with PCI
-- [ ] Layered protocol architecture
+- [x] PCIe history, comparison with PCI
+- [x] Layered protocol architecture
 
 ---
 
@@ -38,25 +36,17 @@
 
 ### PCIe history & motivation
 
-Four PCI bottlenecks:
-
-| Problem               | Meaning                                                |
-| --------------------- | ------------------------------------------------------ |
-| Shared bus            | all devices share one bus; bandwidth is contested      |
-| Parallel + high clock | many wires, skew, reflections; hard to raise frequency |
-| Pin / cost            | 32/64 data lines + address/control                     |
-| Poor scalability      | more devices = more bus load                           |
-Typical PCI peaks : 32-bit @ 33MHz = 133 MB/s ; 64-bit @ 66MHz = 533 MB/s.
+- **Problem PCI had**:
+- **What PCIe changed** (serial, point-to-point, packets):
 
 ### PCIe vs PCI (comparison table)
 
-| Aspect          | PCI                 | PCIe                            |
-| --------------- | ------------------- | ------------------------------- |
-| Topology        | shared bus          | point-to-point links + switch   |
-| Signaling       | parallel            | serial differential             |
-| Bandwidth scale | 133-533 MB/s shared | per-link Gen x lanes, no shared |
-| Arbitration     | Bus arbitration     | no global arbitration           |
-| Hot-plug / PM   | Limited             | Built-in                        |
+| Aspect | PCI | PCIe |
+|--------|-----|------|
+| Topology | shared bus | point-to-point links |
+| Signaling | parallel | serial (embedded clock) |
+| Bandwidth scale | | |
+| Hot-plug / PM | | |
 
 ### Layered protocol architecture
 
@@ -127,8 +117,8 @@ Typical PCI peaks : 32-bit @ 33MHz = 133 MB/s ; 64-bit @ 66MHz = 533 MB/s.
 
 | Step | Done | Date |
 |------|------|------|
-| Watch 1× | [ ] | 2026-07-09 |
-| Notes Pass 2 | [ ] | |
-| Re-watch hard parts | [ ] | |
-| PCILeech cross-ref | [ ] | n/a |
-| Blog draft | [ ] | |
+| Watch 1× | [x] | 2026-07-10 |
+| Notes Pass 2 | [x] | 2026-07-10 |
+| Re-watch hard parts | [x] | 2026-07-10 |
+| PCILeech cross-ref | [x] | n/a |
+| Blog draft | [ ] | Jul 16–17 |

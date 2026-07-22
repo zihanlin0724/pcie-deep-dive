@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/M01_background.md",
+                "file": "notes/M02a_overview.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "M01_background"
+              "title": "M02a_overview"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/M01_background.md",
+                "file": "notes/M02a_overview.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for M01_background"
+              "title": "Backlinks for M02a_overview"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/M01_background.md",
+                "file": "notes/M02a_overview.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from M01_background"
+              "title": "Outgoing links from M02a_overview"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/M01_background.md",
+                "file": "notes/M02a_overview.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of M01_background"
+              "title": "Outline of M02a_overview"
             }
           }
         ]
@@ -180,14 +180,21 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "svgeditor:SVG bearbeiten": false
     }
   },
   "active": "8a0914779dcb74de",
   "lastOpenFiles": [
-    "README.md",
+    "diagrams/MRd_tlp.svg",
+    "notes/M02a_overview.md",
     "notes/M01_background.md",
+    "diagrams",
+    "Untitled.md",
+    "Untitled 1",
+    "Untitled",
     "notes/_template_module.md",
+    "README.md",
     "notes",
     "docs/NOTE_TAKING_GUIDE.md",
     "docs"
