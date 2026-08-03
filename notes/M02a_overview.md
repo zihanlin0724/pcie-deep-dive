@@ -5,7 +5,7 @@
 **Date started**:  
 **Date completed**:  
 **Time spent**: __ h  
-**Status**: Watch ✅ · Cross-ref read ✅ · Notes in progress
+**Status**: Watch ✅ · Cross-ref read ✅ · Notes **v1 uploaded ✅** (2026-07-22)
 
 #pcie/module02a
 

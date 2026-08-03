@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720">
+  <defs>
+    <style>
+      .title { font: 700 18px "Segoe UI", Arial, sans-serif; fill: #1a1a1a; }
+      .sub { font: 600 13px "Segoe UI", Arial, sans-serif; fill: #1a1a1a; }
+      .label { font: 600 11px "Segoe UI", Arial, sans-serif; fill: #1a1a1a; }
+      .bit { font: 500 9px "Segoe UI", Arial, sans-serif; fill: #555; }
+      .tiny { font: 500 10px "Segoe UI", Arial, sans-serif; fill: #333; }
+      .note { font: 400 12px "Segoe UI", Arial, sans-serif; fill: #444; }
+      .legend { font: 500 11px "Segoe UI", Arial, sans-serif; fill: #222; }
+    </style>
+  </defs>
+
+  <rect width="960" height="720" fill="#fafafa"/>
+
+  <text x="40" y="36" class="title">PCIe Generic TLP Header</text>
+  <text x="40" y="56" class="note">Bit fields within each DW (MSB bit 31 → LSB bit 0). Optional Data + Digest follow the header.</text>
+
+  <!-- Overall packet strip -->
+  <text x="40" y="92" class="sub">TLP packet (high level)</text>
+  <g transform="translate(40,104)">
+    <rect x="0" y="0" width="220" height="36" fill="#dbeafe" stroke="#1e3a5f" stroke-width="1.5"/>
+    <text x="110" y="23" text-anchor="middle" class="label">Header (3DW or 4DW)</text>
+    <rect x="220" y="0" width="200" height="36" fill="#fef3c7" stroke="#1e3a5f" stroke-width="1.5"/>
+    <text x="320" y="23" text-anchor="middle" class="label">Data (optional)</text>
+    <rect x="420" y="0" width="160" height="36" fill="#e5e7eb" stroke="#1e3a5f" stroke-width="1.5"/>
+    <text x="500" y="23" text-anchor="middle" class="label">ECRC / Digest (opt)</text>
+  </g>
+
+  <!-- DW0 -->
+  <text x="40" y="175" class="sub">DW 0</text>
+  <g transform="translate(40,186)">
+    <!-- bit numbers -->
+    <text x="0" y="0" class="bit">31</text>
+    <text x="72" y="0" class="bit">29</text>
+    <text x="88" y="0" class="bit">28</text>
+    <text x="168" y="0" class="bit">24</text>
+    <text x="184" y="0" class="bit">23</text>
+    <text x="208" y="0" class="bit">22</text>
+    <text x="256" y="0" class="bit">20</text>
+    <text x="272" y="0" class="bit">19</text>
+    <text x="296" y="0" class="bit">18</text>
+    <text x="320" y="0" class="bit">17</text>
+    <text x="344" y="0" class="bit">16</text>
+    <text x="368" y="0" class="bit">15</text>
+    <text x="392" y="0" class="bit">14</text>
+    <text x="416" y="0" class="bit">13</text>
+    <text x="456" y="0" class="bit">12</text>
+    <text x="472" y="0" class="bit">11</text>
+    <text x="512" y="0" class="bit">10</text>
+    <text x="528" y="0" class="bit">9</text>
+    <text x="860" y="0" class="bit">0</text>
+
+    <!-- fields: total width ~880 for 32 bits → 27.5 px/bit -->
+    <!-- Fmt 3bits = 82.5 → 83 -->
+    <rect x="0" y="8" width="82.5" height="44" fill="#bfdbfe" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="41" y="28" text-anchor="middle" class="label">Fmt</text>
+    <text x="41" y="42" text-anchor="middle" class="tiny">[31:29]</text>
+
+    <!-- Type 5bits = 137.5 -->
+    <rect x="82.5" y="8" width="137.5" height="44" fill="#93c5fd" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="151" y="28" text-anchor="middle" class="label">Type</text>
+    <text x="151" y="42" text-anchor="middle" class="tiny">[28:24]</text>
+
+    <!-- T9 / R 1bit -->
+    <rect x="220" y="8" width="27.5" height="44" fill="#e5e7eb" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="234" y="28" text-anchor="middle" class="tiny">T9</text>
+    <text x="234" y="42" text-anchor="middle" class="tiny">23</text>
+
+    <!-- TC 3bits -->
+    <rect x="247.5" y="8" width="82.5" height="44" fill="#bbf7d0" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="289" y="28" text-anchor="middle" class="label">TC</text>
+    <text x="289" y="42" text-anchor="middle" class="tiny">[22:20]</text>
+
+    <!-- T8 / R -->
+    <rect x="330" y="8" width="27.5" height="44" fill="#e5e7eb" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="344" y="28" text-anchor="middle" class="tiny">T8</text>
+    <text x="344" y="42" text-anchor="middle" class="tiny">19</text>
+
+    <!-- Attr[2] IDO -->
+    <rect x="357.5" y="8" width="27.5" height="44" fill="#fde68a" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="371" y="28" text-anchor="middle" class="tiny">Attr</text>
+    <text x="371" y="42" text-anchor="middle" class="tiny">2</text>
+
+    <!-- LN / R -->
+    <rect x="385" y="8" width="27.5" height="44" fill="#e5e7eb" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="399" y="28" text-anchor="middle" class="tiny">LN</text>
+    <text x="399" y="42" text-anchor="middle" class="tiny">17</text>
+
+    <!-- TH -->
+    <rect x="412.5" y="8" width="27.5" height="44" fill="#fde68a" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="426" y="28" text-anchor="middle" class="tiny">TH</text>
+    <text x="426" y="42" text-anchor="middle" class="tiny">16</text>
+
+    <!-- TD -->
+    <rect x="440" y="8" width="27.5" height="44" fill="#fecaca" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="454" y="28" text-anchor="middle" class="tiny">TD</text>
+    <text x="454" y="42" text-anchor="middle" class="tiny">15</text>
+
+    <!-- EP -->
+    <rect x="467.5" y="8" width="27.5" height="44" fill="#fecaca" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="481" y="28" text-anchor="middle" class="tiny">EP</text>
+    <text x="481" y="42" text-anchor="middle" class="tiny">14</text>
+
+    <!-- Attr[1:0] 2bits -->
+    <rect x="495" y="8" width="55" height="44" fill="#fde68a" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="522" y="28" text-anchor="middle" class="label">Attr</text>
+    <text x="522" y="42" text-anchor="middle" class="tiny">[13:12]</text>
+
+    <!-- AT 2bits -->
+    <rect x="550" y="8" width="55" height="44" fill="#ddd6fe" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="577" y="28" text-anchor="middle" class="label">AT</text>
+    <text x="577" y="42" text-anchor="middle" class="tiny">[11:10]</text>
+
+    <!-- Length 10bits -->
+    <rect x="605" y="8" width="275" height="44" fill="#a7f3d0" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="742" y="28" text-anchor="middle" class="label">Length</text>
+    <text x="742" y="42" text-anchor="middle" class="tiny">[9:0]  DW count</text>
+  </g>
+
+  <!-- DW1 -->
+  <text x="40" y="275" class="sub">DW 1</text>
+  <g transform="translate(40,286)">
+    <text x="0" y="0" class="bit">31</text>
+    <text x="420" y="0" class="bit">16</text>
+    <text x="440" y="0" class="bit">15</text>
+    <text x="640" y="0" class="bit">8</text>
+    <text x="660" y="0" class="bit">7</text>
+    <text x="760" y="0" class="bit">4</text>
+    <text x="780" y="0" class="bit">3</text>
+    <text x="860" y="0" class="bit">0</text>
+
+    <!-- Requester ID 16 bits -->
+    <rect x="0" y="8" width="440" height="44" fill="#bfdbfe" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="220" y="28" text-anchor="middle" class="label">Requester ID</text>
+    <text x="220" y="42" text-anchor="middle" class="tiny">[31:16]  Bus[7:0] · Device[4:0] · Function[2:0]</text>
+
+    <!-- Tag 8 bits -->
+    <rect x="440" y="8" width="220" height="44" fill="#fde68a" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="550" y="28" text-anchor="middle" class="label">Tag</text>
+    <text x="550" y="42" text-anchor="middle" class="tiny">[15:8]</text>
+
+    <!-- Last DW BE 4 bits -->
+    <rect x="660" y="8" width="110" height="44" fill="#fecaca" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="715" y="28" text-anchor="middle" class="label">Last BE</text>
+    <text x="715" y="42" text-anchor="middle" class="tiny">[7:4]</text>
+
+    <!-- First DW BE 4 bits -->
+    <rect x="770" y="8" width="110" height="44" fill="#fda4af" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="825" y="28" text-anchor="middle" class="label">1st BE</text>
+    <text x="825" y="42" text-anchor="middle" class="tiny">[3:0]</text>
+  </g>
+
+  <!-- DW2 / DW3 address -->
+  <text x="40" y="375" class="sub">DW 2 / DW 3 — Address (depends on Fmt → 3DW vs 4DW header)</text>
+  <g transform="translate(40,386)">
+    <rect x="0" y="0" width="880" height="52" fill="#ede9fe" stroke="#1e3a5f" stroke-width="1.2"/>
+    <text x="440" y="22" text-anchor="middle" class="label">3DW header: DW2 = Address[31:2] + PH  ·  (no DW3)</text>
+    <text x="440" y="40" text-anchor="middle" class="tiny">4DW header: DW2 = Address[63:32]  ·  DW3 = Address[31:2] + PH</text>
+  </g>
+
+  <!-- Fmt / Type quick ref -->
+  <text x="40" y="480" class="sub">Fmt[2:0] quick reference</text>
+  <g transform="translate(40,492)">
+    <rect x="0" y="0" width="430" height="100" fill="#fff" stroke="#94a3b8" stroke-width="1"/>
+    <text x="12" y="22" class="tiny">000 = 3DW, no data</text>
+    <text x="12" y="40" class="tiny">001 = 4DW, no data</text>
+    <text x="12" y="58" class="tiny">010 = 3DW, with data</text>
+    <text x="12" y="76" class="tiny">011 = 4DW, with data</text>
+    <text x="220" y="22" class="tiny">Type[4:0] selects TLP kind:</text>
+    <text x="220" y="40" class="tiny">MRd / MWr / IO / Cfg / Cpl / Msg …</text>
+    <text x="220" y="58" class="tiny">Fmt + Type together decode the TLP</text>
+    <text x="220" y="76" class="tiny">(see Module 5 / eBook Ch5 tables)</text>
+  </g>
+
+  <!-- Legend -->
+  <text x="500" y="480" class="sub">Field groups</text>
+  <g transform="translate(500,492)">
+    <rect x="0" y="0" width="18" height="14" fill="#93c5fd" stroke="#1e3a5f"/>
+    <text x="26" y="12" class="legend">Fmt / Type / Requester ID</text>
+    <rect x="0" y="22" width="18" height="14" fill="#bbf7d0" stroke="#1e3a5f"/>
+    <text x="26" y="34" class="legend">TC / Length</text>
+    <rect x="0" y="44" width="18" height="14" fill="#fde68a" stroke="#1e3a5f"/>
+    <text x="26" y="56" class="legend">Attr / TH / Tag</text>
+    <rect x="0" y="66" width="18" height="14" fill="#fecaca" stroke="#1e3a5f"/>
+    <text x="26" y="78" class="legend">TD / EP / Byte Enables</text>
+  </g>
+
+  <text x="40" y="640" class="note">Notes: TD=1 → Digest present · EP=poisoned · Length in DW (0 = 1024 DW for some rules).</text>
+  <text x="40" y="660" class="note">Completion headers replace BE fields with Completer ID / Status / Byte Count (see Cpl format).</text>
+  <text x="40" y="690" class="tiny">Source: MindShare Module 5 / PCIe Base Spec generic TLP header · diagrams/tlp_header.svg</text>
+</svg>

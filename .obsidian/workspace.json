@@ -11,17 +11,28 @@
             "id": "8a0914779dcb74de",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "notes/M02a_overview.md",
-                "mode": "source",
-                "source": false
+                "file": "diagrams/tlp_header.svg"
               },
-              "icon": "lucide-file",
-              "title": "M02a_overview"
+              "icon": "lucide-image",
+              "title": "tlp_header"
+            }
+          },
+          {
+            "id": "45ad1d0741eca44a",
+            "type": "leaf",
+            "state": {
+              "type": "drawio-file-view",
+              "state": {
+                "file": "diagrams/tlp_header.drawio"
+              },
+              "icon": "pencil-ruler",
+              "title": "tlp_header"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -78,7 +89,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "ee6bcb22100100ea",
@@ -181,12 +192,17 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
-      "svgeditor:SVG bearbeiten": false
+      "svgeditor:SVG bearbeiten": false,
+      "drawio-editor:Create new drawio diagram": false
     }
   },
-  "active": "8a0914779dcb74de",
+  "active": "45ad1d0741eca44a",
   "lastOpenFiles": [
+    "diagrams/tlp_header.svg",
+    "diagrams/tlp_header.drawio",
     "diagrams/MRd_tlp.svg",
+    "notes/M05_overview.md",
+    "notes/M02b_overview.md",
     "notes/M02a_overview.md",
     "notes/M01_background.md",
     "diagrams",
