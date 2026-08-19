@@ -23,12 +23,14 @@
             "id": "45ad1d0741eca44a",
             "type": "leaf",
             "state": {
-              "type": "drawio-file-view",
+              "type": "markdown",
               "state": {
-                "file": "diagrams/tlp_header.drawio"
+                "file": "notes/M05_overview.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "pencil-ruler",
-              "title": "tlp_header"
+              "icon": "lucide-file",
+              "title": "M05_overview"
             }
           }
         ],
@@ -52,7 +54,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -198,11 +202,11 @@
   },
   "active": "45ad1d0741eca44a",
   "lastOpenFiles": [
-    "diagrams/tlp_header.svg",
     "diagrams/tlp_header.drawio",
-    "diagrams/MRd_tlp.svg",
     "notes/M05_overview.md",
     "notes/M02b_overview.md",
+    "diagrams/tlp_header.svg",
+    "diagrams/MRd_tlp.svg",
     "notes/M02a_overview.md",
     "notes/M01_background.md",
     "diagrams",
